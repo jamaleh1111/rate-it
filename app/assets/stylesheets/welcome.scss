@@ -7,24 +7,8 @@ h1 {
   color: red;
 }
 
-#index-title {
-  text-align: center;
-  font-size: 15px;
+.social-btn {
   color: blue;
-}
-
-.posts {
-  border: solid;
-  margin: 5px;
-  padding: 5px;
-  height: 200px;
-}
-
-section {
-  height: 400px;
-  background: #5998ff;
-  border-style: solid;
-  border-width: 5px;
-  margin: 5px;
-  padding: 5px;
+  border: 5px, solid, red;
+  padding: 5px;  
 }
