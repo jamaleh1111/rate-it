@@ -4,11 +4,32 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
-
+#instantiates a new post
   def new
+    @post = Post.new
   end
+#updates and saves to database.  POST action
+  def create
+    @post = Post.new
+    @post.title = params[:post][:title]
+    @post.body = params[:post][:body]
+
+    if @post.save
+      flash[:notice] = "Post was saved."
+      redirect_to @post
+    else
+      flash[:error] = "There was a problem saving the post.  Please try again."
+      render :new
+    end
+  end 
 
   def edit
   end
+
+  # private
+  # def post_params
+
+  # end 
 end
