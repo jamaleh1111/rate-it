@@ -43,6 +43,17 @@ class PostsController < ApplicationController
     end 
   end 
 
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:notice] = "\"#{@post.title}\" was deleted successfully."
+      redirect_to posts_path
+    else
+      flash[:error] = "There was an error deleting the post. Please try again."
+      redirect_to :show
+    end 
+  end 
+
   # private
   # def post_params
 
