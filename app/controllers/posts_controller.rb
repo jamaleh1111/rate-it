@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  #This before_action filter makes it so that unsigned in guests are redirected to a new session form. 
+  #they are able to view posts, but will not be able to do the other CRUD actions.
+  before_action :require_sign_in, except: :show
   #the index of posts are nexted under each topic
   # def index
   #   @posts = Post.all
@@ -14,11 +17,9 @@ class PostsController < ApplicationController
   end
 #updates and saves to database.  POST action
   def create
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
     @topic = Topic.find(params[:topic_id])
-    @post.topic = @topic
+    @post = @topic.posts.build(post_params)
+    @post.user = current_user
 
     if @post.save
       flash[:notice] = "Post was saved."
@@ -35,8 +36,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    @post.assign_attributes(post_params)
 
     if @post.save
       flash[:notice] = "Post was updated."
@@ -58,8 +58,8 @@ class PostsController < ApplicationController
     end 
   end 
 
-  # private
-  # def post_params
-
-  # end 
+  private
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end 
 end
