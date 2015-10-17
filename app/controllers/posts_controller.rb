@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   #This before_action filter makes it so that unsigned in guests are redirected to a new session form. 
   #they are able to view posts, but will not be able to do the other CRUD actions.
   before_action :require_sign_in, except: :show
+  before_action :authorize_user, except: [:show, :new, :create]
   #the index of posts are nexted under each topic
   # def index
   #   @posts = Post.all
@@ -61,5 +62,13 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :body)
+  end 
+
+  def authorize_user
+    post = Post.find(params[:id])
+    unless current_user == post.user || current_user.admin?
+      flash[:error] = "You must be an admin to do that."
+      redirect_to [post.topic, post]
+    end 
   end 
 end
