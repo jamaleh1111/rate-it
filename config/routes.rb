@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  
+  #shallow nesting
   resources :topics do 
     resources :posts, except: [:index]
+  end 
+
+  resources :posts, only: [] do#[] to create posts/:post_id/comments
+    resources :comments, only: [:create, :destroy] #no need for show update or edit because comments will be shown on the posts#show
   end 
 
   resources :users, only: [:new, :create]
