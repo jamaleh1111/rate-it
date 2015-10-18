@@ -5,13 +5,14 @@ class Post < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
   validates :topic, presence: true
   validates :user, presence: true
   
-  # after_create :create_vote #this will automatically give your own post an upvote
+  after_create :create_vote #this will automatically give your own post an upvote
   default_scope { order('rank DESC') } # most recent will be shown first, changed to 'rank' to show the highest ranked on top.
 
   def up_votes
