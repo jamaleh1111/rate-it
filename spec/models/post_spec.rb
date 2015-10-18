@@ -98,5 +98,16 @@ RSpec.describe Post, type: :model do
       expect(post.votes.first.user).to eq(post.user)
     end 
   end 
+
+  describe "after_create" do 
+    before do 
+      @self_post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: current_user)
+    end 
+
+    it "sends an email to users after they created a post" do 
+      #something here
+      #expect(FavoriteMailer).to receive(:new_)
+      @self_post.save
+    end 
 end 
 
