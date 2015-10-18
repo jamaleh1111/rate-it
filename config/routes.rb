@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :labels, only: [:show]
+
   #shallow nesting
   resources :topics do 
     resources :posts, except: [:index]

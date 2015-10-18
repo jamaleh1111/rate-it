@@ -10,6 +10,8 @@ RSpec.describe Post, type: :model do
   #2 associate user wiht post wiht we create the test post
   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
   
+  it { should have_many(:labelings) }
+  it { should have_many(:labels).through(:labelings) }
   it { should have_many(:comments) }
 
   it { should belong_to(:topic) }
