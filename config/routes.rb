@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   resources :posts, only: [] do#[] to create posts/:post_id/comments
     resources :comments, only: [:create, :destroy] #no need for show update or edit because comments will be shown on the posts#show
+    #creating POST routes for votes
+    post '/up-vote' => 'votes#up_vote', as: :up_vote
+    post '/down-vote' => 'votes#down_vote', as: :down_vote
   end 
 
   resources :users, only: [:new, :create]
