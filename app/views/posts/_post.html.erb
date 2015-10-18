@@ -1,4 +1,4 @@
-<div class="media">
+<%= content_tag :div, class: 'media', id: "post-#{post.id}" do %>
   <div class="media-body">
     <h4 class="media-heading">
       <%= link_to post.title, topic_post_path(@topic, post) %>
@@ -8,4 +8,4 @@
       <%= post.comments.count %> Comments
     </small>
   </div>
-</div>
+<% end %>

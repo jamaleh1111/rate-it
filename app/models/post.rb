@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true
   validates :user, presence: true
   
+  after_create :send_new_post
   after_create :create_vote #this will automatically give your own post an upvote
   default_scope { order('rank DESC') } # most recent will be shown first, changed to 'rank' to show the highest ranked on top.
 
@@ -36,6 +37,12 @@ class Post < ActiveRecord::Base
   private
   def create_vote
     user.votes.create(value: 1, post: self)
+  end 
+
+  def send_new_post
+    post.favorites.each do |favorite|
+      FavoriteMailer.new_post(favorite.user, post, self).deliver_now
+    end 
   end 
 
 end
