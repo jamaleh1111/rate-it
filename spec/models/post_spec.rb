@@ -2,13 +2,9 @@ require 'rails_helper'
 include RandomData
 
 RSpec.describe Post, type: :model do
-  #creating a parent topic for post
-  let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  
-  #1 create a user to associate with a test post
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  #2 associate user wiht post wiht we create the test post
-  let(:post) { Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user, topic: topic) }
+  let(:topic) { create(:topic) }
+  let(:post) { create(:post) }
+  let(:user) { create(:user) }
   
   it { should have_many(:labelings) }
   it { should have_many(:labels).through(:labelings) }

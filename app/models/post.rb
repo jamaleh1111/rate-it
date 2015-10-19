@@ -16,8 +16,10 @@ class Post < ActiveRecord::Base
   after_create :create_favorite
   after_create :create_vote #this will automatically give your own post an upvote
   after_create :send_new_post
-  default_scope { order('rank DESC') } # most recent will be shown first, changed to 'rank' to show the highest ranked on top.
 
+  default_scope { order('rank DESC') } # most recent will be shown first, changed to 'rank' to show the highest ranked on top.
+  scope :visible_to, -> (user) { user ? all :joins(:topic).where('topics.public' => true) }
+  
   def up_votes
     votes.where(value: 1).count
   end 
