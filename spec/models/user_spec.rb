@@ -2,7 +2,8 @@ require 'rails_helper'
 include RandomData
 
 RSpec.describe User, type: :model do
-  let(:user) { User.create!(name: "Rate-it User", email: "user@rate-it.com", password: "password") }
+  # let(:user) { User.create!(name: "Rate-it User", email: "user@rate-it.com", password: "password") }
+  let(:user) { create(:user) } #we can do this because of factory girl
   it { should have_many(:posts) }
 #Shoulda tests for name
 
@@ -113,7 +114,18 @@ end
       expect(user.favorite_for(@post)).to eq(favorite)
     end 
   end 
-  
+
+  describe ".avatar_url" do 
+    #6 lbuild user with factory girl, overriding it with our own email.
+    let(:known_user) { create(:user, email: "blochead@bloc.io") }
+    
+    it "returns the proper Gravatar url for a known email entity" do 
+      #7 expected gravatar with s=48 (48X48px) size.
+      expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
+      #8 the avatar url returned.
+      expect(User.avatar_url(known_user, 48)).to eq(expected_gravatar)
+    end 
+  end   
 end
 
   
