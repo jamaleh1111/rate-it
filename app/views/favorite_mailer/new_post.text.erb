@@ -3,4 +3,4 @@ You have written a new post: "<%= @post.title %>"
 
 This post is automatically favorited by you and you will receive email notifications when other users have commented on your post, "<%=@post.title %>"
 
-Visit online at: <%= topic_post_url(@post.topic, anchor: "post-#{@post.id}" %>)
+Visit online at: <%= topic_post_url(@post.topic, @post) %>
