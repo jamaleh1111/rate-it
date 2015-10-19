@@ -116,7 +116,7 @@ end
   end 
 
   describe ".avatar_url" do 
-    #6 lbuild user with factory girl, overriding it with our own email.
+    #6 build user with factory girl, overriding it with our own email.
     let(:known_user) { create(:user, email: "blochead@bloc.io") }
     
     it "returns the proper Gravatar url for a known email entity" do 

@@ -95,19 +95,19 @@ RSpec.describe Post, type: :model do
     end 
   end 
 
-  describe "after_create" do #initialize a new post
-    before do 
-      @self_post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
-    end 
+  # describe "after_create" do #initialize a new post
+  #   before do 
+  #     @self_post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+  #   end 
 
-    it "sends an email to users after they created a post to show that its favorited" do 
-      #something here
-      # favorite = user.favorites.create(post: post) #favorite the post
+  #   it "sends an email to users after they created a post to show that its favorited" do 
+  #     #something here
+  #     # favorite = user.favorites.create(post: post) #favorite the post
       
-      expect(FavoriteMailer).to receive(:new_post).with(user, @self_post).and_return(double(deliver_now: true)) #send an email to show that this post if favorited and that they will receive emails when ppl have commented.
-      @self_post.save
+  #     expect(FavoriteMailer).to receive(:new_post).with(user, @self_post).and_return(double(deliver_now: true)) #send an email to show that this post if favorited and that they will receive emails when ppl have commented.
+  #     @self_post.save
       
-    end 
-  end 
+  #   end 
+  # end 
 end 
 
