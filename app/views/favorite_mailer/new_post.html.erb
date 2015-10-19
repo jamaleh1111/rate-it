@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>You have written a new post, "<%= @post.title %>"</h1>
+      <p>You will now receive email notifications when other users have commented on your post.</p>  
+      <p><%= link_to "View Post on site", topic_post_url(@post.topic, @post) %></p>
+  </body>
+</html>

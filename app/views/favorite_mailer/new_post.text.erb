@@ -1,0 +1,6 @@
+You have written a new post: "<%= @post.title %>"
+<%= "=" * (@post.title.length + 12) %>
+
+This post is automatically favorited by you and you will receive email notifications when other users have commented on your post, "<%=@post.title %>"
+
+Visit online at: <%= topic_post_url(@post.topic, @post) %>
