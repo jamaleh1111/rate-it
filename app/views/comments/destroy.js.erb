@@ -1,9 +1,9 @@
 <% if @comment.destroyed? %>
-  $('#comment-' +<%= @comment.id %>).hide();
+  $('#comment-' +<%= @comment.id %>).prepend("<div class='alert alert-danger'><button type='button' class='close' data-dimiss='alert'>&times;</button><%= flash[:error] %></div>");
+
 
   $('.js-comments-count').html("<%= pluralize(@comment.user.comments.count, 'comment') %>");
 <% else %>
-
-  $('.flash').prepend("<div class='alert alert-danger'><button type='button' class='close' data-dimiss='alert'>&times;</button><%= flash[:error] %></div>");
+  $('#comment-' +<%= @comment.id %>).hide();
 
 <% end %>
