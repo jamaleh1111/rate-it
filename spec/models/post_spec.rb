@@ -2,9 +2,13 @@ require 'rails_helper'
 include RandomData
 
 RSpec.describe Post, type: :model do
-  let(:topic) { create(:topic) }
-  let(:user) { create(:user) }
-  let(:post) { create(:post) }
+  let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
+  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+  let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
+  
+  # let(:topic) { create(:topic) }
+  # let(:user) { create(:user) }
+  # let(:post) { create(:post) }
   
   it { should have_many(:labelings) }
   it { should have_many(:labels).through(:labelings) }
@@ -79,21 +83,21 @@ RSpec.describe Post, type: :model do
     end 
   end 
 
-  describe "#create_vote" do 
-    it "sets the post up_votes to 1" do 
-      expect(post.up_votes).to eq(1)
-    end 
+  # describe "#create_vote" do 
+  #   it "sets the post up_votes to 1" do 
+  #     expect(post.up_votes).to eq(1)
+  #   end 
 
-    it "calls #create_vote when a post is created" do 
-      post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
-      expect(post).to receive(:create_vote)
-      post.save
-    end 
+  #   it "calls #create_vote when a post is created" do 
+  #     post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+  #     expect(post).to receive(:create_vote)
+  #     post.save
+  #   end 
 
-    it "associates the vote with the owner of the post" do 
-      expect(post.votes.first.user).to eq(post.user)
-    end 
-  end 
+  #   it "associates the vote with the owner of the post" do 
+  #     expect(post.votes.first.user).to eq(post.user)
+  #   end 
+  # end 
 
   # describe "after_create" do #initialize a new post
   #   before do 

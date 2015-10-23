@@ -99,21 +99,21 @@ end
     end 
   end 
 
-  describe "#favorite_for(post)" do 
-    before do 
-      topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
-      @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
-    end 
+  # describe "#favorite_for(post)" do 
+  #   before do 
+  #     topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
+  #     @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+  #   end 
 
-    it "returns `nil` if the user has not favorited the post" do 
-      expect(user.favorite_for(@post)).to be_nil
-    end 
+  #   it "returns `nil` if the user has not favorited the post" do 
+  #     expect(user.favorite_for(@post)).to be_nil
+  #   end 
 
-    it "returns the appropriate favorite if it exists" do 
-      favorite = user.favorites.where(post: @post).create
-      expect(user.favorite_for(@post)).to eq(favorite)
-    end 
-  end 
+  #   it "returns the appropriate favorite if it exists" do 
+  #     favorite = user.favorites.where(post: @post).create
+  #     expect(user.favorite_for(@post)).to eq(favorite)
+  #   end 
+  # end 
 
   describe ".avatar_url" do 
     #6 build user with factory girl, overriding it with our own email.

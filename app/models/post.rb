@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :topic
-  has_many :comments, dependent: :destroy
   belongs_to :user
+  has_many :comments, dependent: :destroy
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
   has_many :votes, dependent: :destroy
@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
   
   
   # after_create :create_favorite
-  after_create :create_vote #this will automatically give your own post an upvote
+  # after_create :create_vote #this will automatically give your own post an upvote
   # after_create :send_new_post
 
   default_scope { order('rank DESC') } # most recent will be shown first, changed to 'rank' to show the highest ranked on top.
@@ -39,9 +39,9 @@ class Post < ActiveRecord::Base
   end 
 
   private
-  def create_vote
-    user.votes.create(value: 1, post: self)
-  end 
+  # def create_vote
+  #   user.votes.create(value: 1, post: self)
+  # end 
 
   # def create_favorite
   #   user.favorites.create(post: self)
