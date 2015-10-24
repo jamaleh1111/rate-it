@@ -3,8 +3,8 @@ include RandomData
 
 RSpec.describe Label, type: :model do 
   let(:topic) { create(:topic) }
-  let(:post) { create(:post) }
   let(:user) { create(:user) }
+  let(:post) { create(:post) }
   let(:label) { Label.create!(name: 'Label') }
   let(:label2) { Label.create!(name: 'Label2') }
   it { should belong_to :labelable }
