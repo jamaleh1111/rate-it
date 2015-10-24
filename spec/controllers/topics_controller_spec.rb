@@ -81,11 +81,11 @@ RSpec.describe TopicsController, type: :controller do
     end
   end 
 
-  it "does not include private topics in @topics" do 
-    get :index
-    expect(assigns(:topics)).not_to include(my_private_topic)
+    it "does not include private topics in @topics" do 
+      get :index
+      expect(assigns(:topics)).not_to include(my_private_topic)
+    end 
   end 
-end 
 
   context "member user" do 
     before do 
