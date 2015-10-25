@@ -14,8 +14,7 @@ class Post < ActiveRecord::Base
   
   
   # after_create :create_favorite #this will automatically favorite your own post
-  # after_create :create_vote #this will automatically give your own post an upvote
-  # after_create :send_new_post
+  after_create :create_vote #this will automatically give your own post an upvote
 
   default_scope { order('rank DESC') } # most recent will be shown first, changed to 'rank' to show the highest ranked on top.
   scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
@@ -39,21 +38,17 @@ class Post < ActiveRecord::Base
   end 
 
   private
-  # def create_vote
-  #   user.votes.create(value: 1, post: self)
-  # end 
+  def create_vote
+    user.votes.create(value: 1, post: self)
+  end 
 
+
+#This favorites your own post after creating.  then send an email to you.  
   # def create_favorite
-  #   user.favorites.create(post: self)
+  #   Favorite.create(post: self, user: self.user)
+  #   FavoriteMailer.new_post(self).deliver_now
   # end 
 
 
-  
-#not working!!!!!
-  # def send_new_post
-  #   favorites.each do |favorite|
-  #     FavoriteMailer.new_post(favorite.user, self).deliver_now
-  #   end 
-  # end 
 
 end
