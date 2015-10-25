@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   validates :user, presence: true
   
   
-  # after_create :create_favorite
+  # after_create :create_favorite #this will automatically favorite your own post
   # after_create :create_vote #this will automatically give your own post an upvote
   # after_create :send_new_post
 
@@ -47,6 +47,9 @@ class Post < ActiveRecord::Base
   #   user.favorites.create(post: self)
   # end 
 
+
+  
+#not working!!!!!
   # def send_new_post
   #   favorites.each do |favorite|
   #     FavoriteMailer.new_post(favorite.user, self).deliver_now
