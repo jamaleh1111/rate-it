@@ -94,6 +94,44 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(my_user.to_json).to eq response.body
       end 
     end 
+
+    describe "PUT update" do 
+      context "with valid attributes" do 
+        before do 
+          @new_user = build(:user)
+          put :update, id: my_user.id, user: { name: @new_user.name, email: @new_user.email, password: @new_user.password, role: "admin" }
+        end 
+
+        it "returns http success" do 
+          expect(response).to have_http_status(:success)
+        end 
+
+        it "returns json content type" do 
+          expect(response.content_type).to eq 'application/json' 
+        end 
+
+        it "updates a user with the correct attributes" do 
+          hashed_json = JSON.parse(response.body)
+          expect(@new_user.name).to eq hashed_json["name"]
+          expect(@new_user.email).to eq hashed_json["email"]
+          expect("admin").to eq hashed_json["role"]
+        end 
+      end 
+
+      context "with invalid attributes" do 
+        before do 
+          put :update, id: my_user.id, user: { name: "", email: "bademail@", password: "short" }
+        end 
+
+        it "returns http error" do 
+          expect(response).to have_http_status(400)
+        end 
+
+        it "returns the correct json error message" do 
+          expect(response.body).to eq({"error" => "User update failed","status" => 400}.to_json)
+        end 
+      end 
+    end 
   end 
 end 
 
