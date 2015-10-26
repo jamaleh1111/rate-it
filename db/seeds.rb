@@ -5,7 +5,8 @@ include RandomData
   user = User.create!(
     name:  RandomData.random_name,
     email:  RandomData.random_email,
-    password: RandomData.random_sentence
+    password: RandomData.random_sentence,
+    auth_token: RandomData.random_sentence
     )
 end 
 users = User.all
