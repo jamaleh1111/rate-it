@@ -1,0 +1,11 @@
+<%= paginator.render do -%>
+<div class="text-center">
+  <div class="pagination">
+    <ul class="pager">
+      <%= prev_page_tag unless current_page.first? %>
+
+      <%= next_page_tag unless current_page.last? %>
+    </ul>
+  </div>
+</div>
+<% end -%>

@@ -28,3 +28,27 @@
  .nav {
    margin-top: 5px;
  }
+
+ /****
+ PAGINATION
+ ****/
+ .pagination ul {
+  list-style: none;
+ }
+ .pagination ul li>a {
+   display: inline-block;
+   padding: 5px 14px;
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-radius: 15px;
+
+ }
+ 
+ a {
+  color: #337ab7;
+  text-decoration: none;
+ }
+
+ ul.pager {
+  display: inline-block;
+ }

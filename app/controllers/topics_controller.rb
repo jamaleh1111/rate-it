@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   before_action :authorize_user, except: [:index, :show]
 
   def index
-    @topics = Topic.visible_to(current_user)
+    @topics = Topic.visible_to(current_user).page(params[:page]).per(5)
   end 
 
   def show
